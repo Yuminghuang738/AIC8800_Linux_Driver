@@ -1,0 +1,69 @@
+# ===========================================================================
+#  .gitignore for the AIC8800 USB WiFi driver repository
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Kernel module build artifacts (kbuild, both in-tree and out-of-tree)
+# ---------------------------------------------------------------------------
+*.o
+*.o.*
+*.ko
+*.ko.*
+*.mod
+*.mod.c
+*.mod.o
+*.a
+*.symvers
+Module.symvers
+modules.order
+.modules.order.cmd
+.Module.symvers.cmd
+.tmp_versions/
+.cache.mk
+*.cmd
+
+# ---------------------------------------------------------------------------
+# IMPORTANT: the firmware blobs ARE part of this repository (firmware/).
+# Do NOT add "firmware/" or "*.bin" rules here -- they would silently exclude
+# all the firmware .bin files and the driver would not work without them.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Packaged / prebuilt output
+# ---------------------------------------------------------------------------
+*.deb
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.zip
+build/
+dist/
+out/
+
+# ---------------------------------------------------------------------------
+# Local build scratch (host specific, never commit)
+# ---------------------------------------------------------------------------
+_buildtest/
+_buildtest2/
+_buildtest*/
+_makefile-orig/
+_deploy/
+
+# ---------------------------------------------------------------------------
+# Editors and OS junk
+# ---------------------------------------------------------------------------
+*~
+*.swp
+*.swo
+*.kate-swp
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# ---------------------------------------------------------------------------
+# Patch leftovers
+# ---------------------------------------------------------------------------
+*.orig
+*.rej
