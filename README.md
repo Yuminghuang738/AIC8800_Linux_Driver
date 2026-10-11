@@ -64,7 +64,7 @@ make -C driver/aic8800 \
 ```
 
 Passing `ARCH`, `CROSS_COMPILE` and `KDIR` on the command line is the supported
-way to cross compile; they override whatever the Makefiles default to.
+way to cross compile; they override the defaults in the Makefiles.
 
 | Variable | Default | Meaning |
 |---|---|---|
@@ -191,15 +191,6 @@ udhcpc -i wlan0
 
 ## Notes and known issues
 
-* **`CONFIG_WERROR=y` breaks the build.** `aic8800_fdrv/aicwf_usb.c:2571` has a
-  `printk` with a missing argument, which the kernel turns into an error. Either
-  build with `make KCFLAGS=-Wno-error ...` or fix the line by appending
-  `, __func__`.
-* **The Makefiles still contain vendor paths.** The `CONFIG_PLATFORM_ROCKCHIP` /
-  `ALLWINNER` / `AMLOGIC` / `HI` branches hardcode paths from the original
-  author's build machines, and force `ARCH=arm64` plus `-DANDROID_PLATFORM`. They
-  are inactive by default; always pass `KDIR`, `ARCH` and `CROSS_COMPILE`
-  explicitly.
 * **U-disk mode is not persistent.** Many AIC8800 adapters enumerate first as a
   USB mass storage device (`a69c:5721`, SCSI name `AIC flash`). The `eject`
   switches them to WiFi mode for the current session only; after a power cycle or
@@ -208,11 +199,9 @@ udhcpc -i wlan0
 * **Re-enumeration can be flaky.** `device descriptor read error -110 / -71` and
   `usb usbN-portM: attempt power cycle` are common right after the switch.
   Retrying usually succeeds.
-* **`EXTRA_CFLAGS` is deprecated.** `aic8800_fdrv/Makefile` still uses it;
-  switching to `ccflags-y` is recommended.
 * **`CONFIG_PLATFORM_HI` does not affect `aic_load_fw`.** The source contains
   `#ifdef CONFIG_PLATFORM_HI` in `aic_load_fw`, but the Makefile never defines the
-  macro for that module. This was left as-is to preserve the original behaviour.
+  macro for that module.
 
 ## Verified environment
 
