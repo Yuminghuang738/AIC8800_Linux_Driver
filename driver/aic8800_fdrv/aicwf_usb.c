@@ -2568,7 +2568,7 @@ static void aicwf_usb_disconnect(struct usb_interface *intf)
 		atomic_set(&aicwf_deinit_atomic, 0);
 		//down(&aicwf_deinit_sem);
 		if (down_trylock(&aicwf_deinit_sem) != 0) {
-			printk("%s aicwf_deinit_sem already locked, skipping\n");
+			printk("%s aicwf_deinit_sem already locked, skipping\n", __func__);
 		}
 	}
     AICWFDBG(LOGINFO, "%s Enter2\r\n", __func__);
